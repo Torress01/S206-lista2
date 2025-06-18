@@ -1,0 +1,546 @@
+{
+	"info": {
+		"_postman_id": "d6b1629d-cf96-4a62-b0f3-93bcc2e6c6c9",
+		"name": "S206",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44963315"
+	},
+	"item": [
+		{
+			"name": "Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let response = pm.response.json()\r",
+							"pm.environment.set('Cookie', response.token);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-XSRF-TOKEN",
+						"value": "{{Cookie}}",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{BaseURL}}get-csrf-token",
+					"host": [
+						"{{BaseURL}}get-csrf-token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-XSRF-TOKEN",
+						"value": "{{Cookie}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"torres@\",\r\n    \"password\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}login",
+					"host": [
+						"{{BaseURL}}login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Procurar todos os times",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{BaseURL}}api/v1/Time/all",
+					"host": [
+						"{{BaseURL}}api"
+					],
+					"path": [
+						"v1",
+						"Time",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Procurar Grupo 31",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{BaseURL}}api/v1/Time/31",
+					"host": [
+						"{{BaseURL}}api"
+					],
+					"path": [
+						"v1",
+						"Time",
+						"31"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Procurar Grupo 52",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{BaseURL}}api/v1/Time/52",
+					"host": [
+						"{{BaseURL}}api"
+					],
+					"path": [
+						"v1",
+						"Time",
+						"52"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Procurar Grupo 12",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{BaseURL}}api/v1/Time/12",
+					"host": [
+						"{{BaseURL}}api"
+					],
+					"path": [
+						"v1",
+						"Time",
+						"12"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Procurar Grupo que nao existe",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{BaseURL}}api/v1/Time/31212",
+					"host": [
+						"{{BaseURL}}api"
+					],
+					"path": [
+						"v1",
+						"Time",
+						"31212"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create time",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-XSRF-TOKEN",
+						"value": "{{Cookie}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}api/v1/Time/create?titulo=RoboMutante&orientador_email=felipeb@inatel.br&status=ativo&paralela=xxxx&email_aluno1=ppppp@gmail.com",
+					"host": [
+						"{{BaseURL}}api"
+					],
+					"path": [
+						"v1",
+						"Time",
+						"create"
+					],
+					"query": [
+						{
+							"key": "titulo",
+							"value": "RoboMutante"
+						},
+						{
+							"key": "orientador_email",
+							"value": "felipeb@inatel.br"
+						},
+						{
+							"key": "status",
+							"value": "ativo"
+						},
+						{
+							"key": "paralela",
+							"value": "xxxx"
+						},
+						{
+							"key": "email_aluno1",
+							"value": "ppppp@gmail.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create time secundario",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-XSRF-TOKEN",
+						"value": "{{Cookie}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"titulo\": \"Robo mutante\",\r\n  \"orientador_email\": \"SpringMan@gmail.com\",\r\n  \"status\": \"ativo\",\r\n  \"paralela\": \"xxxx\",\r\n  \"email_aluno1\": \"ppppp@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}api/v1/Time/create?titulo=VarinhaMágica&orientador_email=felipeb@inatel.br&status=ativo&paralela=Projeto Internacional&email_aluno1=pp@gmail.com",
+					"host": [
+						"{{BaseURL}}api"
+					],
+					"path": [
+						"v1",
+						"Time",
+						"create"
+					],
+					"query": [
+						{
+							"key": "titulo",
+							"value": "VarinhaMágica"
+						},
+						{
+							"key": "orientador_email",
+							"value": "felipeb@inatel.br"
+						},
+						{
+							"key": "status",
+							"value": "ativo"
+						},
+						{
+							"key": "paralela",
+							"value": "Projeto Internacional"
+						},
+						{
+							"key": "email_aluno1",
+							"value": "pp@gmail.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create time erro",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-XSRF-TOKEN",
+						"value": "{{Cookie}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"titulo\": \"Robo mutante\",\r\n  \"orientador_email\": \"SpringMan@gmail.com\",\r\n  \"status\": \"ativo\",\r\n  \"paralela\": \"xxxx\",\r\n  \"email_aluno1\": \"ppppp@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}api/v1/Time/create?titulo=RoboNaoMutante2&orientador_email=jonassss@gmail.br&status=ativo&paralela=xxxx&email_aluno1=anna.clara@ges.inatel.br",
+					"host": [
+						"{{BaseURL}}api"
+					],
+					"path": [
+						"v1",
+						"Time",
+						"create"
+					],
+					"query": [
+						{
+							"key": "titulo",
+							"value": "RoboNaoMutante2"
+						},
+						{
+							"key": "orientador_email",
+							"value": "jonassss@gmail.br"
+						},
+						{
+							"key": "status",
+							"value": "ativo"
+						},
+						{
+							"key": "paralela",
+							"value": "xxxx"
+						},
+						{
+							"key": "email_aluno1",
+							"value": "anna.clara@ges.inatel.br"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar time",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "X-XSRF-TOKEN",
+						"value": "{{Cookie}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{BaseURL}}api/v1/Time/update?numgrupo=1246&titulo=RoboMuitoMutante&orientador_email=felipeb@inatel.br&status=ativo&paralela=xxxx&email_aluno1=ppppp@gmail.com&email_aluno2=pp@gmail.com",
+					"host": [
+						"{{BaseURL}}api"
+					],
+					"path": [
+						"v1",
+						"Time",
+						"update"
+					],
+					"query": [
+						{
+							"key": "numgrupo",
+							"value": "1246"
+						},
+						{
+							"key": "titulo",
+							"value": "RoboMuitoMutante"
+						},
+						{
+							"key": "orientador_email",
+							"value": "felipeb@inatel.br"
+						},
+						{
+							"key": "status",
+							"value": "ativo"
+						},
+						{
+							"key": "paralela",
+							"value": "xxxx"
+						},
+						{
+							"key": "email_aluno1",
+							"value": "ppppp@gmail.com"
+						},
+						{
+							"key": "email_aluno2",
+							"value": "pp@gmail.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deletar time",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X-XSRF-TOKEN",
+						"value": "{{Cookie}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}api/v1/Time/delete?numgrupo=1247",
+					"host": [
+						"{{BaseURL}}api"
+					],
+					"path": [
+						"v1",
+						"Time",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "numgrupo",
+							"value": "1247"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deletar time 2",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X-XSRF-TOKEN",
+						"value": "{{Cookie}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}api/v1/Time/delete?numgrupo=61",
+					"host": [
+						"{{BaseURL}}api"
+					],
+					"path": [
+						"v1",
+						"Time",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "numgrupo",
+							"value": "61"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deletar time que nao existe",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X-XSRF-TOKEN",
+						"value": "{{Cookie}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}api/v1/Time/delete?numgrupo=321221",
+					"host": [
+						"{{BaseURL}}api"
+					],
+					"path": [
+						"v1",
+						"Time",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "numgrupo",
+							"value": "321221"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
