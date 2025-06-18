@@ -1,0 +1,317 @@
+{
+	"info": {
+		"_postman_id": "2d2fc6c7-4464-4fb8-aeb5-e860d0bf7793",
+		"name": "Orientadores",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38004619"
+	},
+	"item": [
+		{
+			"name": "Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let response = pm.response.json()\r",
+							"pm.environment.set('Cookie', response.token);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-XSRF-TOKEN",
+						"value": "{{Cookie}}",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{BaseURL}}get-csrf-token",
+					"host": [
+						"{{BaseURL}}get-csrf-token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.eql(\"Authentication successful\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-XSRF-TOKEN",
+						"value": "{{Cookie}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"torres@\",\r\n    \"password\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}login",
+					"host": [
+						"{{BaseURL}}login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FAIL login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(401);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-XSRF-TOKEN",
+						"value": "{{Cookie}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"torres@1\",\r\n    \"password\": \"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}login",
+					"host": [
+						"{{BaseURL}}login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create Orientador",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-XSRF-TOKEN",
+						"value": "{{Cookie}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"felipe1234@email.com\",\r\n    \"nome\": \"felipe1234\",\r\n    \"password\": \"felipe1234\",\r\n    \"acesso\": \"PROFESSOR\",\r\n    \"ativo\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}api/v1/Orientador/add",
+					"host": [
+						"{{BaseURL}}api"
+					],
+					"path": [
+						"v1",
+						"Orientador",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update Orientador",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-XSRF-TOKEN",
+						"value": "{{Cookie}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"felipe1234@email.com\",\r\n    \"nome\": \"felipe12345\",\r\n    \"password\": \"felipe12345\",\r\n    \"acesso\": \"PROFESSOR\",\r\n    \"ativo\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}api/v1/Orientador/update?email=felipe1234@email.com",
+					"host": [
+						"{{BaseURL}}api"
+					],
+					"path": [
+						"v1",
+						"Orientador",
+						"update"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "felipe1234@email.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete Orientador",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X-XSRF-TOKEN",
+						"value": "{{Cookie}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}api/v1/Orientador/delete/felipe1234@email.com",
+					"host": [
+						"{{BaseURL}}api"
+					],
+					"path": [
+						"v1",
+						"Orientador",
+						"delete",
+						"felipe1234@email.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Orientador",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-XSRF-TOKEN",
+						"value": "{{Cookie}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}api/v1/Orientador/get/felipe1234@email.com",
+					"host": [
+						"{{BaseURL}}api"
+					],
+					"path": [
+						"v1",
+						"Orientador",
+						"get",
+						"felipe1234@email.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Orientador Teams",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-XSRF-TOKEN",
+						"value": "{{Cookie}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}api/v1/Orientador/teams",
+					"host": [
+						"{{BaseURL}}api"
+					],
+					"path": [
+						"v1",
+						"Orientador",
+						"teams"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
