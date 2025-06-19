@@ -5,3 +5,6 @@ Orientadores:
 
 Alunos: 
   newman run S206_lista2_Alunos.postman_collection.json -e S206_lista2_Alunos.postman_environment -r htmlextra
+
+Projetos: 
+  newman run S206_Projetos.postman_collection.json -e S206_Projetos.postman_environment -r htmlextra
